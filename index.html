@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wade Kimbrough | Game Designer for Impact</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #1a1a1a;
+            --paper: #faf9f7;
+            --accent: #2563eb;
+            --accent-light: #dbeafe;
+            --muted: #6b7280;
+            --border: #e5e5e5;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--paper);
+            color: var(--ink);
+            line-height: 1.6;
+            font-size: 17px;
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        
+        a:hover {
+            opacity: 0.7;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        header {
+            padding: 80px 0 60px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .header-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+        }
+        
+        header h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+        
+        .tagline {
+            font-size: 1.25rem;
+            color: var(--muted);
+            margin-bottom: 24px;
+        }
+        
+        .intro {
+            font-size: 1.1rem;
+            max-width: 680px;
+            margin-bottom: 24px;
+        }
+        
+        .contact-links {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        
+        .contact-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        section:last-of-type {
+            border-bottom: none;
+        }
+        
+        section h2 {
+            font-size: 2rem;
+            margin-bottom: 48px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        section h2::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+        
+        /* Project Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 48px;
+        }
+        
+        .project {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .project:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+        }
+        
+        .project-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            background: var(--accent-light);
+        }
+        
+        .project-content {
+            padding: 24px;
+        }
+        
+        .project-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 4px 10px;
+            background: var(--accent-light);
+            color: var(--accent);
+            border-radius: 4px;
+        }
+        
+        .project h3 {
+            font-size: 1.35rem;
+            margin-bottom: 8px;
+        }
+        
+        .project-client {
+            font-size: 0.9rem;
+            color: var(--muted);
+            margin-bottom: 12px;
+        }
+        
+        .project p {
+            font-size: 0.95rem;
+            color: #444;
+            margin-bottom: 16px;
+        }
+        
+        .project-link {
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+        }
+        
+        .skill-category h3 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            color: var(--accent);
+        }
+        
+        .skill-category ul {
+            list-style: none;
+        }
+        
+        .skill-category li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
+        }
+        
+        .skill-category li:last-child {
+            border-bottom: none;
+        }
+        
+        /* Publications */
+        .publications {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        
+        .publication {
+            padding: 24px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+        
+        .publication h3 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+        
+        .publication-meta {
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+        
+        /* Footer */
+        footer {
+            padding: 48px 0;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+        
+        footer a {
+            color: var(--muted);
+            text-decoration: underline;
+        }
+        
+        /* Responsive */
+        @media (max-width: 640px) {
+            header {
+                padding: 48px 0 40px;
+            }
+            
+            section {
+                padding: 48px 0;
+            }
+            
+            section h2 {
+                font-size: 1.5rem;
+                margin-bottom: 32px;
+            }
+            
+            .projects-grid {
+                gap: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <h1>Wade Kimbrough</h1>
+                    <p class="tagline">Game Designer • Serious Games • Design Researcher</p>
+                    <p class="intro">
+                        I design games that change behavior. For over a decade, I've created play-based interventions for UNICEF, the World Bank, Red Cross, World Wildlife Fund, DARPA, and the World Economic Forum—reaching tens of thousands of people across 20+ countries. My work spans public health, climate adaptation, digital well-being, and civic engagement.
+                    </p>
+                    <div class="contact-links">
+                        <a href="mailto:wadek2@gmail.com">✉ wadek2@gmail.com</a>
+                        <a href="https://linkedin.com/in/wadekimbrough/" target="_blank">LinkedIn →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="projects">
+        <div class="container">
+            <h2>Selected Projects</h2>
+            <div class="projects-grid">
+                
+                <!-- Handwashing with Ananse -->
+                <article class="project">
+                    <img src="https://www.unicef.org/innovation/sites/unicef.org.innovation/files/styles/hero_tablet/public/Ghana%20%2832%29.JPG" alt="Children playing Handwashing with Ananse game in Ghana" class="project-image">
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">Health</span>
+                            <span class="tag">Behavior Change</span>
+                        </div>
+                        <h3>Handwashing with Ananse</h3>
+                        <p class="project-client">UNICEF Ghana • Lead Game Designer</p>
+                        <p>A culturally-grounded play-based curriculum that generated significant, measurable increases in handwashing with soap among Ghanaian primary-school children. Based on traditional Ananse folklore with songs, dance, and games. Now used nationwide in every Ghanaian elementary school.</p>
+                        <a href="https://www.unicef.org/innovation/stories/new-game-teach-children-essential-hygiene-practices" class="project-link" target="_blank">Read UNICEF Story →</a>
+                    </div>
+                </article>
+                
+                <!-- Hygiene with Chhota Bheem -->
+                <article class="project">
+                    <img src="https://res.cloudinary.com/engagement-lab-home/image/upload/v1/chhota-bheem/art/module1" alt="Hygiene with Chhota Bheem curriculum" class="project-image">
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">Health</span>
+                            <span class="tag">Mobile Game</span>
+                        </div>
+                        <h3>Hygiene with Chhota Bheem</h3>
+                        <p class="project-client">UBS Optimus Foundation • Design Team Lead</p>
+                        <p>A multi-format curriculum driving behavior change around toilet use and handwashing in Tamil Nadu, India. Designed physical games, a mobile game, songs, and animated stories featuring beloved Indian cartoon character Chhota Bheem.</p>
+                        <a href="https://chhotabheem.engagementlab.work/" class="project-link" target="_blank">Explore Project →</a>
+                    </div>
+                </article>
+                
+                <!-- Y-Adapt -->
+                <article class="project">
+                    <img src="https://www.climatecentre.org/wp-content/uploads/Youth-2.jpg" alt="Youth playing Y-Adapt climate adaptation game" class="project-image">
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">Climate</span>
+                            <span class="tag">Youth</span>
+                        </div>
+                        <h3>Y-Adapt</h3>
+                        <p class="project-client">Red Cross Red Crescent Climate Centre & Plan International • Lead Game Designer</p>
+                        <p>A 7-session curriculum helping young people understand climate change and take practical adaptation action in their communities. Implemented across the Philippines, Haiti, Guatemala, Lebanon, Uganda, and the Maldives.</p>
+                        <a href="https://www.climatecentre.org/priority_areas/youth/y-adapt/" class="project-link" target="_blank">View Curriculum →</a>
+                    </div>
+                </article>
+                
+                <!-- WEF Cartoon-a-thon -->
+                <article class="project">
+                    <img src="https://assets.weforum.org/editor/YaPGowNAfeum2a8VA-8PKKBlEz7FWOEGjx7h8Xj5pXQ.png" alt="AI-generated cartoon for World Economic Forum climate discussions" class="project-image">
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">AI</span>
+                            <span class="tag">Climate</span>
+                        </div>
+                        <h3>WEF Cartoon-a-thons</h3>
+                        <p class="project-client">World Economic Forum • AI Design Consultant</p>
+                        <p>Pioneered use of generative AI (ChatGPT + Midjourney) to create cartoons that help policymakers discuss climate contradictions and paradoxes. Featured at Sustainable Development Impact Meetings 2023.</p>
+                        <a href="https://www.weforum.org/stories/2023/11/humour-and-generative-ai-can-help-us-discuss-the-climate-crisis/" class="project-link" target="_blank">Read WEF Article →</a>
+                    </div>
+                </article>
+                
+                <!-- Cabo Verde / World Bank -->
+                <article class="project">
+                    <img src="https://blogs.worldbank.org/content/dam/sites/blogs/img/detail/mgr/blog-game-gfdrr.jpg" alt="World Bank simulation game in action" class="project-image">
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">Simulation</span>
+                            <span class="tag">Policy</span>
+                        </div>
+                        <h3>Cabo Verde Resilience Game</h3>
+                        <p class="project-client">World Bank / USAID / Tufts University • Game Designer</p>
+                        <p>A simulation where policymakers role-play infrastructure investment decisions under climate uncertainty. Players must balance resilient vs. efficient infrastructure, weighing trade-offs between preparation and direct disaster mitigation.</p>
+                        <a href="https://blogs.worldbank.org/en/sustainablecities/rolling-dice-learning-through-games-make-better-decisions-resilience" class="project-link" target="_blank">Read World Bank Blog →</a>
+                    </div>
+                </article>
+                
+                <!-- DARPA Daedalus -->
+                <article class="project">
+                    <img src="https://www.argn.com/images/daedalus.jpg" alt="Daedalus ARG promotional image" class="project-image">
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">ARG</span>
+                            <span class="tag">Research</span>
+                        </div>
+                        <h3>Daedalus ARG</h3>
+                        <p class="project-client">DARPA / Northeastern University • Game Designer & Project Manager</p>
+                        <p>An Alternate Reality Game facilitated by Slack chatbots, designed as a research instrument to measure adaptability in team settings. Teams solved puzzles across digital and physical spaces over a week-long experience.</p>
+                        <a href="https://www.argn.com/2018/09/arg_research_teamwork_through_the_lens_of_daedalus/" class="project-link" target="_blank">Read ARGNet Coverage →</a>
+                    </div>
+                </article>
+                
+                <!-- Get the Grade -->
+                <article class="project">
+                    <img src="https://ian.umces.edu/media/blogroll/2016/10/DSC_7181.jpg" alt="Get the Grade game being played at World Water Week" class="project-image" onerror="this.style.background='linear-gradient(135deg, #dbeafe, #bfdbfe)'; this.style.display='block';">
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">Environment</span>
+                            <span class="tag">Strategy</span>
+                        </div>
+                        <h3>Get the Grade</h3>
+                        <p class="project-client">World Wildlife Fund • Game Designer</p>
+                        <p>A tabletop roleplay game teaching the importance of river-basin report cards for freshwater management. Players represent competing stakeholder interests and must collaborate to raise their basin's health grade. Launched at World Water Week, IUCN Congress, and International Riversymposium.</p>
+                        <a href="https://www.worldwildlife.org/magazine/issues/fall-2017/articles/a-role-playing-game-teaches-participants-about-river-basin-management" class="project-link" target="_blank">Read WWF Feature →</a>
+                    </div>
+                </article>
+                
+                <!-- Digital Well-being -->
+                <article class="project">
+                    <img src="https://i.ytimg.com/vi/R1hxYlu_2pI/maxresdefault.jpg" alt="Digital well-being game design" class="project-image" onerror="this.style.background='linear-gradient(135deg, #dbeafe, #bfdbfe)'; this.style.display='block';">
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">Digital Well-being</span>
+                            <span class="tag">Youth</span>
+                        </div>
+                        <h3>Digital Well-being Curricula</h3>
+                        <p class="project-client">#HalfTheStory / Pivotal Ventures • Lead Game Designer</p>
+                        <p>Designed dozens of games teaching healthy digital habits to youth. Led focus groups and design sessions with hundreds of young people. Used AI to rapidly prototype materials and facilitation guides.</p>
+                        <a href="https://www.youtube.com/watch?v=R1hxYlu_2pI" class="project-link" target="_blank">Watch Video →</a>
+                    </div>
+                </article>
+                
+            </div>
+        </div>
+    </section>
+
+    <section id="expertise">
+        <div class="container">
+            <h2>Expertise</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Game Design</h3>
+                    <ul>
+                        <li>Systems & mechanics design</li>
+                        <li>Engagement loops & progression</li>
+                        <li>Physical games & curricula</li>
+                        <li>Digital games (Unity)</li>
+                        <li>Alternate Reality Games</li>
+                        <li>Tabletop roleplay & simulation</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Design Research</h3>
+                    <ul>
+                        <li>Participatory design</li>
+                        <li>Focus group facilitation</li>
+                        <li>Rapid ethnography</li>
+                        <li>Iterative prototyping</li>
+                        <li>Behavior change evaluation</li>
+                        <li>International fieldwork</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Technology</h3>
+                    <ul>
+                        <li>Claude Code & OpenAI API</li>
+                        <li>Stable Diffusion with LoRA</li>
+                        <li>RAG systems</li>
+                        <li>Solidity & TLA+</li>
+                        <li>Blockchain/Web3 mechanisms</li>
+                        <li>Unity & Maya</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Domain Expertise</h3>
+                    <ul>
+                        <li>Public health & WASH</li>
+                        <li>Climate adaptation</li>
+                        <li>Digital well-being</li>
+                        <li>Disaster risk reduction</li>
+                        <li>Financial literacy</li>
+                        <li>Civic engagement</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="publications">
+        <div class="container">
+            <h2>Selected Publications & Press</h2>
+            <div class="publications">
+                <div class="publication">
+                    <h3>Handwashing with Ananse – Evaluating the Effectiveness of a Game-Based Handwashing Curriculum</h3>
+                    <p class="publication-meta">Dawson et al. • Engagement Lab White Paper • 2019</p>
+                </div>
+                <div class="publication">
+                    <h3>Teamwork and Adaptation in Games (TAG): A Survey to Gauge Teamwork</h3>
+                    <p class="publication-meta">Harteveld et al. • ACM Foundations of Digital Games • 2019</p>
+                </div>
+                <div class="publication">
+                    <h3>Periodicity in Cryptocurrency Volatility and Liquidity</h3>
+                    <p class="publication-meta">Hansen, Kim, and Kimbrough • arXiv • 2021</p>
+                </div>
+                <div class="publication">
+                    <h3>Humour and Generative AI Can Help Us Discuss the Climate Crisis</h3>
+                    <p class="publication-meta">World Economic Forum • November 2023 • <a href="https://www.weforum.org/stories/2023/11/humour-and-generative-ai-can-help-us-discuss-the-climate-crisis/" target="_blank">Read →</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="background">
+        <div class="container">
+            <h2>Background</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Experience</h3>
+                    <ul>
+                        <li><strong>Consultant</strong> — 2017–Present<br><span style="color: var(--muted); font-size: 0.9rem;">World Bank, DARPA, Ripple, WEF, Red Cross, #HalfTheStory</span></li>
+                        <li><strong>Engagement Lab</strong> — 2014–2017<br><span style="color: var(--muted); font-size: 0.9rem;">Game Designer / Applied Researcher. Secured $710K+ in grants.</span></li>
+                        <li><strong>Emerson College</strong> — 2015–2021<br><span style="color: var(--muted); font-size: 0.9rem;">Affiliated Faculty: Game Design, 3D Design, Animation</span></li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Education</h3>
+                    <ul>
+                        <li><strong>M.F.A., Visual and Media Arts</strong><br><span style="color: var(--muted); font-size: 0.9rem;">Emerson College, 2014</span></li>
+                        <li><strong>B.A., American Studies</strong><br><span style="color: var(--muted); font-size: 0.9rem;">Brandeis University, 2005</span></li>
+                        <li><strong>KERNEL Genesis Block Fellowship</strong><br><span style="color: var(--muted); font-size: 0.9rem;">Gitcoin, 2020</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>Wade Kimbrough • <a href="mailto:wadek2@gmail.com">wadek2@gmail.com</a> • <a href="https://linkedin.com/in/wadekimbrough/" target="_blank">LinkedIn</a></p>
+        </div>
+    </footer>
+</body>
+</html>
